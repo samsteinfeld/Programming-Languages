@@ -1,0 +1,22 @@
+#!/bin/bash
+#myaverage
+#Sam Steinfeld
+#calculates the average of all numbers in a text file
+#input: the name of the file containing numbers, one on each line, that the user wishes to compute the average of
+#output: the average of the numbers in the inputted file
+
+file="$1" #user input file
+value=$(<$file) #store filename
+count=0; #keeps count of amount of numbers
+total=0; #stores total of numbers
+if [ -f $file ]  #see if file exists
+ then
+	for i in $value
+	   do 
+	     let "total = $total + $i"
+	     let "count = $count + 1"
+	   done
+	echo $((total / count))
+else
+	echo
+fi
