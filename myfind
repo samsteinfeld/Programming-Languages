@@ -1,0 +1,14 @@
+#!/bin/bash
+#myfind
+#Sam Steinfeld
+#checks if the user inputted filename exists in the current directory
+#input: the name of the file the user is seeing exists in the directory
+#output: if the file exists, it will output the name of the file; otherewise, nothing will be output
+
+file="$1" #user input file
+if [ -f $file ] #see if file exists
+	then
+		echo $file
+else
+	echo
+fi

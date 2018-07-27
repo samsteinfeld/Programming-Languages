@@ -1,0 +1,55 @@
+#!/bin/bash
+#myfind
+#Sam Steinfeld
+#finds median from a list of numbers in a file the user inputs
+#input: the name of the file containing numbers, one on each line, that the user wishes to find the median of
+#output: the median of the numbers in the inputted file
+
+file="$1" #user inputted file
+sort -n $file > temp  #sort numbers in file
+mv temp $file #move data to temporary file
+value=$(<$file) #name of file
+count=0 #keeps count of numbers in file
+count2=0 #counter that stops when middle number is reached
+Median=0 
+num1=0 #first middle number in files containing even amount of numbers
+num2=0 #second middle number in files containing even amount of numbers
+half=0 #halfway point of numbers in file
+half=0 #halfway point of numbers in file
+if [ -f $file ] #checks to see if file is found
+ then
+	for i in $value
+	   do 
+	     let "count = $count + 1"
+	done
+	half=$((count/2)) 
+	Median2=0
+	let "half2 = $half + 1"
+	for j in $value
+	   do 
+		let "count2 = $count2 + 1"
+		if [ $(($count % 2)) -eq 0 ]; then #checks if there are an even number of numbers in file
+			if [ $count2 -eq $half ];then
+				Median=$j
+				num1=$j
+			fi
+			if [ $count2 -eq $half2 ];then
+				Median2=$j
+				num2=$j
+				let "Median=(($Median+$Median2)/2)"
+			fi
+		
+		else #odd number of numbers in file
+			if [ $count2 -eq $half2 ];then
+				Median=$j
+			fi
+		fi
+	done
+
+	if [ $(((num1+num2) % 2)) -eq 1 ] && [ $(($count % 2)) -eq 0 ]; then #if sum of middle two values is odd and amount of numbers is even
+		Median=$Median.5 #add .5 to median 
+	fi
+	echo $Median	
+else 
+	echo
+fi
